@@ -173,7 +173,7 @@ function endGame(isWin) {
     if (isWin) {
         alert('You win!');
     } else {
-        alert('Game over!');
+        alert('이것도못께냐?');
     }
 }
 
