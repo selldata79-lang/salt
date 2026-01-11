@@ -5,6 +5,7 @@ const boardElement = document.getElementById('game-board');
 const minesCountElement = document.getElementById('mines-count');
 const timerElement = document.getElementById('timer');
 const resetButton = document.getElementById('reset-button');
+const mineImageUpload = document.getElementById('mine-image-upload');
 
 let board = [];
 let mineLocations = [];
@@ -13,6 +14,14 @@ let flaggedCells = 0;
 let gameOver = false;
 let time = 0;
 let timerInterval;
+let mineImageURL = null;
+
+mineImageUpload.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        mineImageURL = URL.createObjectURL(file);
+    }
+});
 
 function initGame() {
     // Reset game state
@@ -26,6 +35,8 @@ function initGame() {
     boardElement.innerHTML = '';
     board = [];
     mineLocations = [];
+    mineImageURL = null;
+    mineImageUpload.value = '';
 
     // Create board
     for (let r = 0; r < BOARD_SIZE; r++) {
@@ -154,6 +165,9 @@ function endGame(isWin) {
     mineLocations.forEach(([r, c]) => {
         const cell = board[r][c];
         cell.element.classList.add('mine');
+        if (mineImageURL) {
+            cell.element.style.backgroundImage = `url(${mineImageURL})`;
+        }
     });
 
     if (isWin) {
