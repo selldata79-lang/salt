@@ -73,10 +73,34 @@ body {
 }
 
 #reset-button {
-    margin-left: 10px;
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.character-selection {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.characters {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.character-option {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.character-option.selected {
+    border-color: #007bff;
 }

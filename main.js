@@ -5,7 +5,7 @@ const boardElement = document.getElementById('game-board');
 const minesCountElement = document.getElementById('mines-count');
 const timerElement = document.getElementById('timer');
 const resetButton = document.getElementById('reset-button');
-const mineImageUpload = document.getElementById('mine-image-upload');
+const characterOptions = document.querySelectorAll('.character-option');
 
 let board = [];
 let mineLocations = [];
@@ -16,11 +16,12 @@ let time = 0;
 let timerInterval;
 let mineImageURL = null;
 
-mineImageUpload.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        mineImageURL = URL.createObjectURL(file);
-    }
+characterOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        characterOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        mineImageURL = option.src;
+    });
 });
 
 function initGame() {
@@ -36,7 +37,8 @@ function initGame() {
     board = [];
     mineLocations = [];
     mineImageURL = null;
-    mineImageUpload.value = '';
+    characterOptions.forEach(opt => opt.classList.remove('selected'));
+
 
     // Create board
     for (let r = 0; r < BOARD_SIZE; r++) {
